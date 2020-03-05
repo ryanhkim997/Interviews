@@ -1,27 +1,23 @@
 let routeBetweenNodes = (node1, node2) => {
   let q = [];
   let seen = new Set();
-  let first = node1;
   q.push({node: node1, depth: 0});
   seen.add(node1);
+  
   while (q.length) {
     let current = q.shift();
-    console.log(current);
+
+    if (current.node === node2) {
+      return true;
+    }
 
     for (let i of current.node.edges) {
-      q.push({node: i, depth: current.depth + 1});
+      if (!seen.has(i)) {
+        q.push({node: i, depth: current.depth + 1});
+        seen.add(i);
+      }
     }
 
-    if (seen.has(current.node)) {
-      if (current.node === first) {
-        return false;
-      }
-      continue;
-    } else if (!seen.has(current.node)) {
-      if (current.node === node2) {
-        return true;
-      }
-    }
   }
   return false;
 }
@@ -56,4 +52,4 @@ graph.nodes.push(second);
 graph.nodes.push(third);
 graph.nodes.push(fourth);
 
-console.log(routeBetweenNodes(first, fourth));
+console.log(routeBetweenNodes(first, third));
