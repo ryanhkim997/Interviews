@@ -10,11 +10,6 @@ let findMinimalTree = (arr) => {
   return root;
 }
 
-// let slicer = (arr) => {
-//   let mid = arr[Math.floor(arr.length / 2)];
-
-// }
-
 class Node {
   constructor(val) {
     this.val = val;
